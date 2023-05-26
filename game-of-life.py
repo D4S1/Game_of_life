@@ -1,6 +1,7 @@
 import time
 import numpy as np
 import pygame
+import patterns
 
 
 COLOR_BACKGROUND = (10, 10, 10)
@@ -54,8 +55,15 @@ def main():
     pygame.init()
     screen = pygame.display.set_mode((800, 600))
 
-    cells = np.zeros((60, 80))
-    gun(cells)
+    cells = np.zeros((100, 100))
+    
+    # PATTERNS
+    # patterns.achimsotherp(cells)
+    # patterns.achimsp144s(cells)
+    # patterns.anura(cells)
+    # patterns.maxi(cells)
+    patterns.blinkership(cells)
+    
     screen.fill(COLOR_GRID)
     update(screen, cells, 10)
 
@@ -77,7 +85,7 @@ def main():
             
             if pygame.mouse.get_pressed()[0]:
                 pos = pygame.mouse.get_pos()
-                cells[pos[1]//10, pos[0]//10] = 1
+                cells[pos[1]//10, pos[0]//10] = 1 if cells[pos[1]//10, pos[0]//10] == 0 else 0
                 update(screen, cells, size=10)
                 pygame.display.update()
             
